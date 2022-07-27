@@ -77,7 +77,23 @@ app.get('/above-18',(req,res)=>{
 
 // write a get rounter to show all the sudents who knows tamil language in web page.
 // hint ===> for inside for
+app.get('/ languageKnownInTamil',(req,res)=>{
+    let lan =[]
+    for (let index = 0; index < studentsData.length; index++) {
+        console.log(studentsData[index]);
+        for (let index = 0; index < langu.length; index++) {
+            if (studentsData[[index].lan = "tamil"]) {
+                lan.push(studentsData[index])
 
+                
+            }
+            
+            
+        }
+        
+    }
+    res.send(lan)
+})
 
 
 
