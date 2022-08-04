@@ -38,6 +38,7 @@ const studentsData = [ //for i ==> studentsData . length //=> for ==> j students
 ]
 
 
+
 const findEligibleStd = (req, res) => {
     let userGender = req.body.userGender
     let userAge = req.body.userAge
@@ -94,6 +95,40 @@ const findDetail = (req, res) => {
 
 }
 
+
+const findLang = (req, res) => {
+    let userLangu = req.body.langu
+    console.log(userLangu);
+    let lan = []
+    for (let index = 0; index < studentsData.length; index++) {
+
+        for (let j = 0; j < studentsData[index].langu.length; j++) {
+            if (studentsData[index].langu[j] == userLangu) {
+                lan.push(studentsData[index])
+            }
+        }
+    }
+    console.log("findLang", utilFunctions.printDateAndTime())
+    lan.length ? res.send(lan) : res.send("no data")
+}
+
+
+
+
+
+const stdAge = (req, res) => {
+    var age = []
+    for (let index = 0; index < studentsData.length; index++) {
+        console.log(studentsData[index]);
+        if (studentsData[index].age >= 18) {
+            age.push(studentsData[index])
+
+        }
+    }
+    console.log("stdAge", utilFunctions.printDateAndTime);
+    res.send(age)
+}
+
 module.exports = {
-    findEligibleStd, findDetail
+    findEligibleStd, findDetail, findLang
 }
