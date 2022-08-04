@@ -1,43 +1,14 @@
-const express = require('express')
+const express = require('express') // importing --- import
 const bodyParser = require('body-parser');
+
+
+const controllers = require('./controller/index')
+
 const app = express()
 app.use(bodyParser.json());
 // rout ==== /path
 
-const studentsData = [ //for i ==> studentsData . length //=> for ==> j studentsData[i].langu , if (tamil)
-    {
-        name: 'jeni',
-        rollNumber: '1234567890',
-        gender: 'female',
-        age: 12,
-        country: "india",
-        langu: ['tamil', 'jarman']
-    },
-    {
-        name: 'Vim',
-        rollNumber: '1234567891',
-        gender: 'male',
-        age: 18,
-        country: "united kingdom",
-        langu: ['tamil', 'english']
-    },
-    {
-        name: 'virs',
-        rollNumber: '1234567892',
-        gender: 'male',
-        age: 18,
-        country: "china",
-        langu: ['gernan', 'english', 'tamil']
-    },
-    {
-        name: 'ance',
-        rollNumber: '1234567893',
-        gender: 'female',
-        age: 22,
-        country: "amrica",
-        langu: ['malayalam', 'english', 'tamil']
-    },
-]
+
 
 
 app.get('/all-students', (req, res) => {
@@ -102,33 +73,12 @@ app.post('/findLang', (req, res) => {
     lan.length ? res.send(lan) : res.send("no data")
 
 })
-app.post('/findDetail', (req, res) => {
-    let stdgender = req.body.stdgender
-    let stdLangu = req.body.stdLangu
-    let stdAge = req.body.stdAge
-    let possibleStudent = []
-    for (let index = 0; index < studentsData.length; index++) {
-        if (studentsData[index].gender === stdgender) {
-            if (studentsData[index].age >= stdAge) {
-                for (let j = 0; j < studentsData[index].langu.length; j++) {
-                    if (studentsData[index].langu[j] === stdLangu) {
-                        possibleStudent.push(studentsData[index])
-                    }
-                }
-            }
-        }
-
-    }
-
-    res.send(possibleStudent)
-
-})
-
-
 // write a post requste to find eligible users condition user must be female  and the same user must know english ||
+app.post('/findDetail',controllers.findDetail)
 
+// this is correct
+app.post('/findEligibleStd',controllers.findEligibleStd)
 
-// write a post req to fing elgr user who is male,and if he is above 18 ,if he is from india,and if he known's english
 app.listen(1998, () => {
     console.log("server is running..");
 })
