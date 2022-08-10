@@ -1,80 +1,43 @@
-const express = require('express') // importing --- import
+const express = require('express')
 const bodyParser = require('body-parser');
 const controllers = require('./controller/index')
 
 const app = express()
 app.use(bodyParser.json());
-// rout ==== /path
 
 
-
-
-app.get('/all-students', (req, res) => {
-    res.send(studentsData)
-})
-
-
-
-
-// write a get router to display above 18 years students in web page
-app.get('/stdAge', (req, res) => {
-    var age = []
-    for (let index = 0; index < studentsData.length; index++) {
-        console.log(studentsData[index]);
-        if (studentsData[index].age >= 18) {
-            age.push(studentsData[index])
-
-        }
-    }
-    res.send(age)
-})
-
-
-app.get('/languageKnownInTamil', (req, res) => {
-    let lan = []
-    for (let index = 0; index < studentsData.length; index++) {//0
-
-        for (let j = 0; j < studentsData[index].langu.length; j++) {
-            if (studentsData[index].langu[j] == "tamil") {
-                lan.push(studentsData[index])
-            }
-        }
-    }
-    res.send(lan)
-})
-
-// post request ==> user send requst ==> server (we) ++> if data we data || no data found
-// middlewars
-// app.post('/findLang', (req, res) => {
-//     let userLangu = req.body.langu
-//     console.log(userLangu);
-
-//     let lan = []
-//     for (let index = 0; index < studentsData.length; index++) {//0
-
-//         for (let j = 0; j < studentsData[index].langu.length; j++) {
-//             if (studentsData[index].langu[j] == userLangu) {
-//                 lan.push(studentsData[index])
-//             }
-//         }
-//     }
-//     // if lang is empty then server shuld send no data 
-//     // res.send(lan)
-//     lan.length ? res.send(lan) : res.send("no data")
-
-// })
-app.get('/stdAge',controllers)
+app.get('/stdAge',controllers.stdAge)
 app.post('/findLang',controllers.findLang)
-app.post('/findDetail',controllers.findDetail)
+//  app.js == requsting , server , linking all documents
+app.post('/findDetail',controllers.findDetail)   // done
 app.post('/findEligibleStd',controllers.findEligibleStd)
+app.get('/languageKnownInTamil', controllers.languageKnownInTamil)
+app.get('/stdAge', controllers.stdAge)
+app.get('/all-students', controllers.allStudents)
+
 
 app.listen(1998, () => {
     console.log("server is running..");
 })
 
+// post ('about-the-day,controller.aboutTheDay)
+/*
+{
+    date:from user,
+    time:from user,
+    title:from user,
+    dec:from user,
+    feelings:from user,
+    id:from code uuid()
+}
+*/
+
 
 /*
-data=[{[]},{[]}...]
-log ==>print all
-single data || array[]==> for loop || data[i].arry.length ==> for 
+get ==> open to all  (seen by all - may one data or n data) == url 
+
+post ==> only end to end (only user and server , may be 1 data or n data) == body
+
+
+
 */

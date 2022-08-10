@@ -1,41 +1,8 @@
-const utilFunctions = require('../utils/utilFunctions')
+const utilFunctions = require('../utils/utilFunctions') //importing
+const service = require('../service/index')
+const { v4: uuidv4 } = require('uuid');
+require('dotenv').config()
 
-
-
-const studentsData = [ //for i ==> studentsData . length //=> for ==> j studentsData[i].langu , if (tamil)
-    {
-        name: 'jhon',
-        rollNumber: '1234567890',
-        gender: 'male',
-        age: 25,
-        country: "india",
-        langu: ['tamil', 'jarman', 'english']
-    },
-    {
-        name: 'Vim',
-        rollNumber: '1234567891',
-        gender: 'male',
-        age: 18,
-        country: "united kingdom",
-        langu: ['tamil', 'english']
-    },
-    {
-        name: 'virs',
-        rollNumber: '1234567892',
-        gender: 'male',
-        age: 18,
-        country: "china",
-        langu: ['gernan', 'english', 'tamil']
-    },
-    {
-        name: 'ance',
-        rollNumber: '1234567893',
-        gender: 'female',
-        age: 22,
-        country: "amrica",
-        langu: ['malayalam', 'english', 'tamil']
-    },
-]
 
 
 
@@ -71,27 +38,33 @@ const findEligibleStd = (req, res) => {
     res.send(eligibleUser)
 }
 
+// "selet * from studentdata where name=$abc" 
 
-
-const findDetail = (req, res) => {
+const findDetail = (req, res) => { //veg
     let stdgender = req.body.stdgender
     let stdLangu = req.body.stdLangu
     let stdAge = req.body.stdAge
-    let possibleStudent = []
-    for (let index = 0; index < studentsData.length; index++) {
-        if (studentsData[index].gender === stdgender) {
-            if (studentsData[index].age >= stdAge) {
-                for (let j = 0; j < studentsData[index].langu.length; j++) {
-                    if (studentsData[index].langu[j] === stdLangu) {
-                        possibleStudent.push(studentsData[index])
-                    }
-                }
-            }
-        }
 
+    let number = req.query.number
+    const name = req.query.name
+    console.log(number,name);
+    console.log("im from env file",process.env.user_NAME)
+
+    try {
+        const possibleStudent = service.findDetailsStudentForAgeGenderLanguage(stdgender, stdLangu, stdAge)
+        const responseData = {
+            "requstingId": "STUDENTAPPLICATION-"+uuidv4(),
+            "status": true,
+            "data": possibleStudent
+        }
+        res.send(responseData)
+
+    } catch (error) {
+        throw "status : false, error: " + error, "requstingId:STUDENTAPPLICATION-" + uuidv4()
     }
+
     console.log("findDetail", utilFunctions.printDateAndTime());
-    res.send(possibleStudent)
+
 
 }
 
@@ -129,6 +102,23 @@ const stdAge = (req, res) => {
     res.send(age)
 }
 
+const languageKnownInTamil = (req, res) => {
+    let lan = []
+    for (let index = 0; index < studentsData.length; index++) {//0
+
+        for (let j = 0; j < studentsData[index].langu.length; j++) {
+            if (studentsData[index].langu[j] == "tamil") {
+                lan.push(studentsData[index])
+            }
+        }
+    }
+    res.send(lan)
+}
+
+const allStudents = (req, res) => {
+    res.send(studentsData)
+}
+
 module.exports = {
-    findEligibleStd, findDetail, findLang
+    findEligibleStd, findDetail, findLang, stdAge, languageKnownInTamil, allStudents
 }
