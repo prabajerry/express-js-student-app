@@ -1,12 +1,15 @@
 const express = require('express')
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
+
 const controllers = require('./controller/index')
+const middlewars  = require('./middlewars/sanitization/index')
 
 const app = express()
 app.use(bodyParser.json());
 
+// verify , validation, auth, sanitize
+app.get('/stdAge',middlewars.sanitization_xssStdAge,controllers.stdAge)
 
-app.get('/stdAge',controllers.stdAge)
 app.post('/findLang',controllers.findLang)
 //  app.js == requsting , server , linking all documents
 app.post('/findDetail',controllers.findDetail)   // done

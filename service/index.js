@@ -53,14 +53,67 @@ const findDetailsStudentForAgeGenderLanguage = (stdgender, stdLangu, stdAge) => 
     if (possibleStudent.length) {
         return possibleStudent
     }
-    else
-    {
+    else {
         throw new Error("no data")
     }
 
-   
+
+}
+const findUserDetail = (userLanguage, userAge, userCountry, userGender) => {
+    let eligibleUser = []
+
+    for (let index = 0; index < studentsData.length; index++) {
+        if (studentsData[index].gender === userGender) {
+
+            if (studentsData[index].age >= userAge) {
+                if (studentsData[index].country === userCountry) {
+                    for (let j = 0; j < studentsData[index].langu.length; j++) {
+
+                        if (studentsData[index].langu[j] === userLanguage) {
+                            eligibleUser.push(studentsData[index])
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+    }
+    return eligibleUser
+
+}
+const findLanguKnow = (userLangu) => {
+    let lan = []
+    for (let index = 0; index < studentsData.length; index++) {
+
+        for (let j = 0; j < studentsData[index].langu.length; j++) {
+            if (studentsData[index].langu[j] == userLangu) {
+                lan.push(studentsData[index])
+            }
+        }
+    }
+    return lan
 }
 
-module.exports ={
-    findDetailsStudentForAgeGenderLanguage
+const stdAge = () => {
+    var age = []
+    for (let index = 0; index < studentsData.length; index++) {
+        console.log(studentsData[index]);
+        if (studentsData[index].age >= 18) {
+            age.push(studentsData[index])
+
+        }
+    }
+    if (age.length) {
+        return age
+    } else {
+        throw new Error("No data")
+    }
+}
+
+module.exports = {
+    findDetailsStudentForAgeGenderLanguage, findUserDetail, findLanguKnow, stdAge
 }

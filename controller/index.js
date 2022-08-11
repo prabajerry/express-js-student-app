@@ -11,30 +11,24 @@ const findEligibleStd = (req, res) => {
     let userAge = req.body.userAge
     let userCountry = req.body.userCountry
     let userLanguage = req.body.userLanguage
-    let eligibleUser = []
 
-    for (let index = 0; index < studentsData.length; index++) {
-        if (studentsData[index].gender === userGender) {
 
-            if (studentsData[index].age >= userAge) {
-                if (studentsData[index].country === userCountry) {
-                    for (let j = 0; j < studentsData[index].langu.length; j++) {
-
-                        if (studentsData[index].langu[j] === userLanguage) {
-                            eligibleUser.push(studentsData[index])
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-        }
-    }
 
     console.log("findEligibleStd ", utilFunctions.printDateAndTime());
+    try {
+        const eligibleUser = service.findUserDetail(userLanguage, userAge, userCountry, userGender)
+        const userResponce = {
+            "status": true,
+            "data": eligibleUser
+
+        }
+        res.send(userResponce)
+    } catch (error) {
+        throw error
+
+
+    }
+
     res.send(eligibleUser)
 }
 
@@ -47,13 +41,13 @@ const findDetail = (req, res) => { //veg
 
     let number = req.query.number
     const name = req.query.name
-    console.log(number,name);
-    console.log("im from env file",process.env.user_NAME)
+    console.log(number, name);
+    console.log("im from env file", process.env.user_NAME)
 
     try {
         const possibleStudent = service.findDetailsStudentForAgeGenderLanguage(stdgender, stdLangu, stdAge)
         const responseData = {
-            "requstingId": "STUDENTAPPLICATION-"+uuidv4(),
+            "requstingId": "STUDENTAPPLICATION-" + uuidv4(),
             "status": true,
             "data": possibleStudent
         }
@@ -70,17 +64,7 @@ const findDetail = (req, res) => { //veg
 
 
 const findLang = (req, res) => {
-    let userLangu = req.body.langu
-    console.log(userLangu);
-    let lan = []
-    for (let index = 0; index < studentsData.length; index++) {
-
-        for (let j = 0; j < studentsData[index].langu.length; j++) {
-            if (studentsData[index].langu[j] == userLangu) {
-                lan.push(studentsData[index])
-            }
-        }
-    }
+    let userLangu = req.body.userLangu
     console.log("findLang", utilFunctions.printDateAndTime())
     lan.length ? res.send(lan) : res.send("no data")
 }
@@ -90,16 +74,13 @@ const findLang = (req, res) => {
 
 
 const stdAge = (req, res) => {
-    var age = []
-    for (let index = 0; index < studentsData.length; index++) {
-        console.log(studentsData[index]);
-        if (studentsData[index].age >= 18) {
-            age.push(studentsData[index])
-
-        }
+    let stdAge = req.body.stdAge
+    try {
+        let listOfStudents = service.stdAge(stdAge)
+        res.send(listOfStudents)
+    } catch (error) {
+        throw error
     }
-    console.log("stdAge", utilFunctions.printDateAndTime);
-    res.send(age)
 }
 
 const languageKnownInTamil = (req, res) => {
