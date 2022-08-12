@@ -66,12 +66,19 @@ const findDetail = (req, res) => { //veg
 const findLang = (req, res) => {
     let userLangu = req.body.userLangu
     console.log("findLang", utilFunctions.printDateAndTime())
-    lan.length ? res.send(lan) : res.send("no data")
 }
-
-
-
-
+try {
+    const lan = service.findLanguKnow(userLangu)
+    const responcelangu = {
+        "status": true,
+        "data": lan
+        
+    }
+    lan.length ? res.send(responcelangu) : res.send("no data")
+    
+} catch (error) {
+          
+}
 
 const stdAge = (req, res) => {
     let stdAge = req.body.stdAge

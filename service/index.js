@@ -95,7 +95,12 @@ const findLanguKnow = (userLangu) => {
             }
         }
     }
-    return lan
+    if (lan.length) {
+        return lan
+    } else {
+        throw new Error("no data")
+        
+    }
 }
 
 const stdAge = () => {
@@ -110,9 +115,10 @@ const stdAge = () => {
     if (age.length) {
         return age
     } else {
-        throw new Error("No data")
+        throw new Error("no data")
     }
 }
+
 
 module.exports = {
     findDetailsStudentForAgeGenderLanguage, findUserDetail, findLanguKnow, stdAge

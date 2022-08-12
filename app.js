@@ -2,18 +2,18 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 const controllers = require('./controller/index')
-const middlewars  = require('./middlewars/sanitization/index')
+const middlewars = require('./middlewars/sanitization/index')
 
 const app = express()
 app.use(bodyParser.json());
-
+// nodemailer  ==> 30 - 60 
 // verify , validation, auth, sanitize
-app.get('/stdAge',middlewars.sanitization_xssStdAge,controllers.stdAge)
+app.get('/stdAge', middlewars.sanitization_xssStdAge, controllers.stdAge)
 
-app.post('/findLang',controllers.findLang)
+app.post('/findLang', controllers.findLang)
 //  app.js == requsting , server , linking all documents
-app.post('/findDetail',controllers.findDetail)   // done
-app.post('/findEligibleStd',controllers.findEligibleStd)
+app.post('/findDetail', controllers.findDetail)   // done
+app.post('/findEligibleStd', controllers.findEligibleStd)
 app.get('/languageKnownInTamil', controllers.languageKnownInTamil)
 app.get('/stdAge', controllers.stdAge)
 app.get('/all-students', controllers.allStudents)
