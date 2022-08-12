@@ -119,7 +119,26 @@ const stdAge = () => {
     }
 }
 
+const userLanguageInTamil = () => {
+    let langu = []
+    for (let index = 0; index < studentsData.length; index++) {//0
+
+        for (let j = 0; j < studentsData[index].langu.length; j++) {
+            if (studentsData[index].langu[j] == "tamil") {
+                langu.push(studentsData[index])
+            }
+        }
+    }
+    if (langu.length) {
+        
+        return langu
+    } else {
+        throw new Error("no data")
+        
+    }
+}
+
 
 module.exports = {
-    findDetailsStudentForAgeGenderLanguage, findUserDetail, findLanguKnow, stdAge
+    findDetailsStudentForAgeGenderLanguage, findUserDetail, findLanguKnow, stdAge,userLanguageInTamil
 }

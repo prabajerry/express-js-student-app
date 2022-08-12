@@ -66,19 +66,19 @@ const findDetail = (req, res) => { //veg
 const findLang = (req, res) => {
     let userLangu = req.body.userLangu
     console.log("findLang", utilFunctions.printDateAndTime())
-}
-try {
-    const lan = service.findLanguKnow(userLangu)
-    const responcelangu = {
-        "status": true,
-        "data": lan
-        
+    try {
+        const lan = service.findLanguKnow(userLangu)
+        const responcelangu = {
+            "status": true,
+            "data": lan
+        }
+        res.send(responcelangu)
+
+    } catch (error) {
+        throw error
     }
-    lan.length ? res.send(responcelangu) : res.send("no data")
-    
-} catch (error) {
-          
 }
+
 
 const stdAge = (req, res) => {
     let stdAge = req.body.stdAge
@@ -91,16 +91,14 @@ const stdAge = (req, res) => {
 }
 
 const languageKnownInTamil = (req, res) => {
-    let lan = []
-    for (let index = 0; index < studentsData.length; index++) {//0
+    let userLangu = req.body.userLangu
+    try {
+        let language = service.userLanguageInTamil(userLangu)
+        res.send(language)
+    } catch (error) {
+        throw error
 
-        for (let j = 0; j < studentsData[index].langu.length; j++) {
-            if (studentsData[index].langu[j] == "tamil") {
-                lan.push(studentsData[index])
-            }
-        }
     }
-    res.send(lan)
 }
 
 const allStudents = (req, res) => {
