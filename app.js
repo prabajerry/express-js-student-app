@@ -14,7 +14,7 @@ app.post('/findLang', controllers.findLang)
 //  app.js == requsting , server , linking all documents
 app.post('/findDetail', controllers.findDetail)   // done
 app.post('/findEligibleStd', controllers.findEligibleStd)
-app.get('/languageKnownInTamil', controllers.languageKnownInTamil)
+app.get('/languageKnownInTamil',middlewars.sanitization_xsslanguageKnownInTamil, controllers.languageKnownInTamil)
 app.get('/stdAge', controllers.stdAge)
 app.get('/all-students', controllers.allStudents)
 
