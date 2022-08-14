@@ -9,12 +9,12 @@ app.use(bodyParser.json());
 // nodemailer  ==> 30 - 60 
 // verify , validation, auth, sanitize
 app.get('/stdAge', middlewars.sanitization_xssStdAge, controllers.stdAge)
+app.get('/languageKnownInTamil',middlewars.sanitization_xsslanguageKnownInTamil, controllers.languageKnownInTamil)
 
 app.post('/findLang', controllers.findLang)
 //  app.js == requsting , server , linking all documents
 app.post('/findDetail', controllers.findDetail)   // done
-app.post('/findEligibleStd', controllers.findEligibleStd)
-app.get('/languageKnownInTamil',middlewars.sanitization_xsslanguageKnownInTamil, controllers.languageKnownInTamil)
+app.post('/findEligibleStd',middlewars.sanitization_xssfindElibleStd, controllers.findEligibleStd)
 app.get('/stdAge', controllers.stdAge)
 app.get('/all-students', controllers.allStudents)
 

@@ -1,4 +1,5 @@
 const xss = require('xss')
+const { findEligibleStd } = require('../../controller')
 
 
 const sanitization_xssStdAge = (req,res,next)=>{
@@ -16,7 +17,7 @@ const sanitization_xssStdAge = (req,res,next)=>{
 
 }
 const sanitization_xsslanguageKnownInTamil = (req,res,next) =>{
-    let element =req.body.languageKnownInTamil
+    let element = req.body.userLangu
     console.log(element);
 
     let cleanElement = xss(element)
@@ -26,11 +27,25 @@ const sanitization_xsslanguageKnownInTamil = (req,res,next) =>{
         next()
         
     } else {
-        throw new Errorr("xss attack")
+        throw new Error("xss attack")
         
     }
 }
+const sanitization_xssfindElibleStd = (req,res,next) =>{
+    let userData = req.body.userGender
+    console.log(userData);
+    let cleanUserData = xss(userData)
+    console.log(cleanUserData);
+    if (userData == cleanUserData) {
+        console.log("data is passed");
+        next()
+        
+    } else {
+        throw new Error("xss attack")
+        
+    }        
+    } 
 
 module.exports ={
-    sanitization_xssStdAge,sanitization_xsslanguageKnownInTamil
+    sanitization_xssStdAge,sanitization_xsslanguageKnownInTamil,sanitization_xssfindElibleStd
 }
