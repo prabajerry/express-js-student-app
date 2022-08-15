@@ -10,8 +10,8 @@ app.use(bodyParser.json());
 // verify , validation, auth, sanitize
 app.get('/stdAge', middlewars.sanitization_xssStdAge, controllers.stdAge)
 app.get('/languageKnownInTamil',middlewars.sanitization_xsslanguageKnownInTamil, controllers.languageKnownInTamil)
+app.post('/findLang',middlewars.sanitization_xssfindLang, controllers.findLang)
 
-app.post('/findLang', controllers.findLang)
 //  app.js == requsting , server , linking all documents
 app.post('/findDetail', controllers.findDetail)   // done
 app.post('/findEligibleStd',middlewars.sanitization_xssfindElibleStd, controllers.findEligibleStd)

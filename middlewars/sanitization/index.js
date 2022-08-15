@@ -45,7 +45,24 @@ const sanitization_xssfindElibleStd = (req,res,next) =>{
         
     }        
     } 
+    const sanitization_xssfindLang = (req,res,next) =>{
+        let userLanguData = req.body.userLangu
+        console.log(userLanguData);
+        let cleanUesrLanguData = xss(userLanguData)
+        if (userLanguData == cleanUesrLanguData) {
+            console.log("testcase passed");
+            next()
+            
+        } else {
+            throw new Error("xss attack")
+            
+        }
+
+    }
 
 module.exports ={
-    sanitization_xssStdAge,sanitization_xsslanguageKnownInTamil,sanitization_xssfindElibleStd
+    sanitization_xssStdAge,
+    sanitization_xsslanguageKnownInTamil,
+    sanitization_xssfindElibleStd,
+    sanitization_xssfindLang
 }
