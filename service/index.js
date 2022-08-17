@@ -137,8 +137,16 @@ const userLanguageInTamil = () => {
         
     }
 }
+const allStdData =()=>{
+    return studentsData
+}
 
 
 module.exports = {
-    findDetailsStudentForAgeGenderLanguage, findUserDetail, findLanguKnow, stdAge,userLanguageInTamil
+    findDetailsStudentForAgeGenderLanguage, 
+    findUserDetail, 
+    findLanguKnow, 
+    stdAge,
+    userLanguageInTamil,
+    allStdData
 }

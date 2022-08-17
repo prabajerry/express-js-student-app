@@ -33,6 +33,20 @@ const sanitization_xsslanguageKnownInTamil = (req,res,next) =>{
     }
 }
 const sanitization_xssfindElibleStd = (req,res,next) =>{
+    let sanitizeData =[req.body.userGender,req.body.userAge,req.body.userCountry,req.body.userLanguage]
+    for (let index = 0; index < sanitizeData.length; index++) {
+        const element = sanitizeData[index];
+        let cleanedData = xss(element)
+        if (element==cleanedData) {
+            console.log("test passed");
+            next()
+        } else {
+            throw new Error("xss attack")
+            
+        }
+        
+    }
+
     
     } 
     const sanitization_xssfindLang = (req,res,next) =>{

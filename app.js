@@ -15,7 +15,6 @@ app.post('/findEligibleStd',middlewars.sanitization_xssfindElibleStd, controller
 
 //  app.js == requsting , server , linking all documents
 app.post('/findDetail', controllers.findDetail)   // done
-app.get('/stdAge', controllers.stdAge)
 app.get('/all-students', controllers.allStudents)
 
 

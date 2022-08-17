@@ -29,7 +29,6 @@ const findEligibleStd = (req, res) => {
 
     }
 
-    res.send(eligibleUser)
 }
 
 // "selet * from studentdata where name=$abc" 
@@ -102,7 +101,13 @@ const languageKnownInTamil = (req, res) => {
 }
 
 const allStudents = (req, res) => {
-    res.send(studentsData)
+    try {
+        let allStdData = service.allStdData()
+        res.send(allStdData)
+    } catch (error) {
+        throw error
+        
+    }
 }
 
 module.exports = {
