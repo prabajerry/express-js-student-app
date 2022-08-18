@@ -10,12 +10,12 @@ app.use(bodyParser.json());
 // verify , validation, auth, sanitize
 app.get('/stdAge', middlewars.sanitization_xssStdAge, controllers.stdAge)
 app.get('/languageKnownInTamil',middlewars.sanitization_xsslanguageKnownInTamil, controllers.languageKnownInTamil)
+app.get('/all-students', controllers.allStudents)
 app.post('/findLang',middlewars.sanitization_xssfindLang, controllers.findLang)
 app.post('/findEligibleStd',middlewars.sanitization_xssfindElibleStd, controllers.findEligibleStd)
+app.post('/findDetail',middlewars.sanitization_xssfindDetail, controllers.findDetail)   // done
 
 //  app.js == requsting , server , linking all documents
-app.post('/findDetail', controllers.findDetail)   // done
-app.get('/all-students', controllers.allStudents)
 
 
 app.listen(1998, () => {
@@ -41,5 +41,7 @@ get ==> open to all  (seen by all - may one data or n data) == url
 post ==> only end to end (only user and server , may be 1 data or n data) == body
 
 
-
+localhost:1998/all-students
+www.studentapp.go/all-studentslocalhost:1998/all-students
+localhost:1998/all-student
 */
