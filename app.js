@@ -2,18 +2,26 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 const controllers = require('./controller/index')
-const middlewars = require('./middlewars/sanitization/index')
+const sanitization = require('./middlewars/sanitization/index')
+const validater = require('./middlewars/validation/index')
 
 const app = express()
 app.use(bodyParser.json());
 // nodemailer  ==> 30 - 60 
 // verify , validation, auth, sanitize
-app.get('/stdAge', middlewars.sanitization_xssStdAge, controllers.stdAge)
-app.get('/languageKnownInTamil',middlewars.sanitization_xsslanguageKnownInTamil, controllers.languageKnownInTamil)
+
+
+
+app.get('/stdAge',
+    sanitization.sanitization_xssStdAge,
+    validater.validateStudentAge,
+    controllers.stdAge)
+
+app.get('/languageKnownInTamil', sanitization.sanitization_xsslanguageKnownInTamil, controllers.languageKnownInTamil)
 app.get('/all-students', controllers.allStudents)
-app.post('/findLang',middlewars.sanitization_xssfindLang, controllers.findLang)
-app.post('/findEligibleStd',middlewars.sanitization_xssfindElibleStd, controllers.findEligibleStd)
-app.post('/findDetail',middlewars.sanitization_xssfindDetail, controllers.findDetail)   // done
+app.post('/findLang', sanitization.sanitization_xssfindLang, controllers.findLang)
+app.post('/findEligibleStd', sanitization.sanitization_xssfindElibleStd, controllers.findEligibleStd)
+app.post('/findDetail', sanitization.sanitization_xssfindDetail, controllers.findDetail)   // done
 
 //  app.js == requsting , server , linking all documents
 

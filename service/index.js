@@ -103,11 +103,11 @@ const findLanguKnow = (userLangu) => {
     }
 }
 
-const stdAge = () => {
+const stdAge = (stdAge) => {
     var age = []
     for (let index = 0; index < studentsData.length; index++) {
         console.log(studentsData[index]);
-        if (studentsData[index].age >= 18) {
+        if (studentsData[index].age >= stdAge) {
             age.push(studentsData[index])
 
         }
