@@ -23,18 +23,25 @@ const sanitization_xssStdAge = (req, res, next) => {
 
 }
 const sanitization_xsslanguageKnownInTamil = (req, res, next) => {
-    let element = req.body.userLangu
-    console.log(element);
-
-    let cleanElement = xss(element)
-    console.log(cleanElement);
-    if (element == cleanElement) {
-        console.log("test passed");
-        next()
-
-    } else {
-        throw new Error("xss attack")
-
+     
+    if (req.body.userLangu) {
+        
+        let element = req.body.userLangu
+        console.log(element);
+        
+        let cleanElement = xss(element)
+        console.log(cleanElement);
+        if (element == cleanElement) {
+            console.log("test passed");
+            next()
+            
+        } else {
+            throw new Error("xss attack")
+            
+        }
+    }
+    else{
+        throw new Error("empty data")
     }
 }
 const sanitization_xssfindElibleStd = (req, res, next) => {
@@ -95,6 +102,6 @@ module.exports = {
     sanitization_xsslanguageKnownInTamil,
     sanitization_xssfindElibleStd,
     sanitization_xssfindLang,
-    sanitization_xssfindDetail
+    sanitization_xssfindDetail,
 
 }
