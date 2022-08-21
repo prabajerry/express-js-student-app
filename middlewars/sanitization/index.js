@@ -44,8 +44,7 @@ const sanitization_xsslanguageKnownInTamil = (req, res, next) => {
         throw new Error("empty data")
     }
 }
-const sanitization_xssfindElibleStd = (req, res, next) => {
-    
+const sanitization_xssfindElibleStd = (req, res, next) => {    
     let sanitizeData = [req.body.userGender, req.body.userAge, req.body.userCountry, req.body.userLanguage]
         try {
             const checkLength = helper.findArrayLength(sanitizeData)

@@ -17,7 +17,12 @@ app.get('/stdAge',
     validater.validateStudentAge,
     controllers.stdAge)
 
-app.get('/languageKnownInTamil', sanitization.sanitization_xsslanguageKnownInTamil, controllers.languageKnownInTamil)
+app.get('/languageKnownInTamil',
+    sanitization.sanitization_xsslanguageKnownInTamil,
+    validater.validateuserLanguageInTamil,
+    controllers.languageKnownInTamil)
+
+
 app.get('/all-students', controllers.allStudents)
 app.post('/findLang', sanitization.sanitization_xssfindLang, controllers.findLang)
 app.post('/findEligibleStd', sanitization.sanitization_xssfindElibleStd, controllers.findEligibleStd)

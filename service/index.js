@@ -124,7 +124,7 @@ const userLanguageInTamil = () => {
     for (let index = 0; index < studentsData.length; index++) {//0
 
         for (let j = 0; j < studentsData[index].langu.length; j++) {
-            if (studentsData[index].langu[j] == "tamil") {
+            if (studentsData[index].langu[j] == userLangu) {
                 langu.push(studentsData[index])
             }
         }

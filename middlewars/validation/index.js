@@ -1,4 +1,5 @@
 const Joivalidater = require('joi')
+const { validate } = require('uuid')
 
 //  rule ===  input student age == 12 || age must be sting 
 const validateStudentAge = (req, res, next) => {
@@ -25,14 +26,35 @@ const validateStudentAge = (req, res, next) => {
         throw new Error("validation: validateStudentAge() ==> Invalide Data type.")
     }
     else {
-        console.log("valiudation passed");
+        console.log("validation passed");
         next()
     }
 
 
 }
+const validateuserLanguageInTamil = (req,res,next)=>{
+    let userLangu = req.body.userLangu
+    console.log(userLangu);
+    let schema = Joivalidater.object(
+        {
+          userLangu :Joivalidater.string(),
+
+        }
+    )
+    let userResult = schema.validate({userLangu})
+    if (userResult.error) {
+        throw new Error("validation: validateuserLanguageInTamil() ==> Invalide data type.")
+        } else {
+            console.log("validation passed");
+            next
+        
+    }
+
+}
+
 
 
 module.exports = {
-    validateStudentAge
+    validateStudentAge,
+    validateuserLanguageInTamil
 }
