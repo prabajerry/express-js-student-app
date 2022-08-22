@@ -37,7 +37,7 @@ const validateuserLanguageInTamil = (req,res,next)=>{
     console.log(userLangu);
     let schema = Joivalidater.object(
         {
-          userLangu :Joivalidater.string(),
+          userLangu :Joivalidater.string()
 
         }
     )
@@ -51,10 +51,36 @@ const validateuserLanguageInTamil = (req,res,next)=>{
     }
 
 }
+const validatefindEligibleStd =(req,res,next) =>{
+    let userGender = req.body.userGender
+    let userAge = req.body.userAge
+    let userCountry = req.body.userCountry
+    let userLanguage = req.body.userLanguage
+    console.log(userGender,userAge,userCountry,userLanguage);
+    let schema =Joivalidater.object(
+        {
+            userGender:Joivalidater.string(),
+            userAge:Joivalidater.string(),
+            userCountry:Joivalidater.string(),
+            userLanguage:Joivalidater.string()
+        }
+    )  
+    let result =  schema.validate({userGender,userAge,userCountry,userLanguage})
+  if (result) {
+    throw new Error("validation:validate eligible userdetail()==> invalid Data type")
+    
+  } else {
+    console.log("validata Data");
+    next()
+    
+  }
+
+} 
 
 
 
 module.exports = {
     validateStudentAge,
-    validateuserLanguageInTamil
+    validateuserLanguageInTamil,
+    validatefindEligibleStd
 }
