@@ -46,7 +46,7 @@ const validateuserLanguageInTamil = (req,res,next)=>{
         throw new Error("validation: validateuserLanguageInTamil() ==> Invalide data type.")
         } else {
             console.log("validation passed");
-            next
+            next()
         
     }
 
@@ -77,10 +77,37 @@ const validatefindEligibleStd =(req,res,next) =>{
 
 } 
 
+const validatefindLanguKnow =(req,res,next) =>{
+
+    let userLanguData = req.body.userLangu
+    console.log(userLanguData);
+let schema = Joivalidater.object(
+    {
+        userLanguData : Joivalidater.string()
+    }
+)
+let resu = schema.validate({userLangu})
+if(resu){
+    throw new Error("validation:validate eligible userdetail()==> invalid Data type")
+
+}else {
+    console.log("validata Data");
+    next()
+    
+  }
+
+
+}
+
+
+}
+
 
 
 module.exports = {
     validateStudentAge,
     validateuserLanguageInTamil,
-    validatefindEligibleStd
+    validatefindEligibleStd,
+    validatefindLanguKnow
+
 }
