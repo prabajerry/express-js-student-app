@@ -11,9 +11,6 @@ const findEligibleStd = (req, res) => {
     let userAge = req.body.userAge
     let userCountry = req.body.userCountry
     let userLanguage = req.body.userLanguage
-
-
-
     console.log("findEligibleStd ", utilFunctions.printDateAndTime());
     try {
         const eligibleUser = service.findUserDetail(userLanguage, userAge, userCountry, userGender)

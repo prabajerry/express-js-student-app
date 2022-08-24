@@ -27,8 +27,13 @@ sanitization.sanitization_xssfindElibleStd,
 validater.validatefindEligibleStd,
 controllers.findEligibleStd)
 
+
+app.post('/findLang',
+ sanitization.sanitization_xssfindLang,
+ validater.validatefindLanguKnow,
+ controllers.findLang)
+
 app.get('/all-students', controllers.allStudents)
-app.post('/findLang', sanitization.sanitization_xssfindLang, controllers.findLang)
 app.post('/findDetail', sanitization.sanitization_xssfindDetail, controllers.findDetail)   // done
 
 //  app.js == requsting , server , linking all documents

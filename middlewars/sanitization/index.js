@@ -45,6 +45,7 @@ const sanitization_xsslanguageKnownInTamil = (req, res, next) => {
     }
 }
 const sanitization_xssfindElibleStd = (req, res, next) => {    
+    
     let sanitizeData = [req.body.userGender, req.body.userAge, req.body.userCountry, req.body.userLanguage]
         try {
             const checkLength = helper.findArrayLength(sanitizeData)
@@ -69,20 +70,25 @@ const sanitization_xssfindElibleStd = (req, res, next) => {
 
 }
 const sanitization_xssfindDetail = (req, res, next) => {  // task
+    if(sanitizeStuentData.length){
     let sanitizeStuentData = [req.body.stdgender, req.body.stdLangu, req.body.stdAge]
-    for (let index = 0; index < sanitizeStuentData.length; index++) {
-        const element = sanitizeStuentData[index];
-        let cleanstdData = xss(element)
-        if (element == cleanstdData) {
-            console.log("test passed");
-            next()
-        } else {
-            throw new Error("xss attack")
-
+        for (let index = 0; index < sanitizeStuentData.length; index++) {
+            const element = sanitizeStuentData[index];
+            let cleanstdData = xss(element)
+            if (element == cleanstdData) {
+                console.log("test passed");
+                next()
+            } else {
+                throw new Error("xss attack")
+                
+            }
+            
         }
-
     }
-
+    else{
+        throw new Error("empty data")
+    }
+S
 }
 const sanitization_xssfindLang = (req, res, next) => {
     if (req.body.userLangu) {

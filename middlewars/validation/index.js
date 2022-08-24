@@ -98,9 +98,33 @@ if(resu){
 
 
 }
+const validatafindUserDetail = (req,res,next) =>{
+    let stdgender = req.body.stdgender
+    let stdLangu = req.body.stdLangu
+    let stdAge = req.body.stdAge
+    let schema = Joivalidater.obj(
+        {
+            stdLangu : Joivalidater.string(),
+            stdgender : Joivalidater.string(),
+            stdAge : Joivalidater.string()
 
+        }
+    )
+    let resultdemo = schema.validate({stdgender,stdLangu,stdAge,})
+    if (resultdemo) {
+        throw new Error("validata:validata find user detail")
+        
+    } else {
+        console.log("data is validated");
+        next();
+        
+    }
+    
 
 }
+
+
+
 
 
 
@@ -108,6 +132,7 @@ module.exports = {
     validateStudentAge,
     validateuserLanguageInTamil,
     validatefindEligibleStd,
-    validatefindLanguKnow
+    validatefindLanguKnow,
+    validatafindUserDetail
 
 }
