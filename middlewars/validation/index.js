@@ -102,7 +102,7 @@ const validatafindUserDetail = (req,res,next) =>{
     let stdgender = req.body.stdgender
     let stdLangu = req.body.stdLangu
     let stdAge = req.body.stdAge
-    let schema = Joivalidater.obj(
+    let schema = Joivalidater.object(
         {
             stdLangu : Joivalidater.string(),
             stdgender : Joivalidater.string(),
@@ -112,7 +112,7 @@ const validatafindUserDetail = (req,res,next) =>{
     )
     let resultdemo = schema.validate({stdgender,stdLangu,stdAge,})
     if (resultdemo) {
-        throw new Error("validata:validata find user detail")
+        throw new Error("validate::validata find user detail()==> invaild data type")
         
     } else {
         console.log("data is validated");

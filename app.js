@@ -22,19 +22,22 @@ app.get('/languageKnownInTamil',
     validater.validateuserLanguageInTamil,
     controllers.languageKnownInTamil)
 
-app.post('/findEligibleStd', 
-sanitization.sanitization_xssfindElibleStd,
-validater.validatefindEligibleStd,
-controllers.findEligibleStd)
+app.post('/findEligibleStd',
+    sanitization.sanitization_xssfindElibleStd,
+    validater.validatefindEligibleStd,
+    controllers.findEligibleStd)
 
 
 app.post('/findLang',
- sanitization.sanitization_xssfindLang,
- validater.validatefindLanguKnow,
- controllers.findLang)
+    sanitization.sanitization_xssfindLang,
+    validater.validatefindLanguKnow,
+    controllers.findLang)
 
+app.post('/findDetail',
+    sanitization.sanitization_xssfindDetail,
+    validater.validatafindUserDetail,
+    controllers.findDetail)   // done
 app.get('/all-students', controllers.allStudents)
-app.post('/findDetail', sanitization.sanitization_xssfindDetail, controllers.findDetail)   // done
 
 //  app.js == requsting , server , linking all documents
 
