@@ -45,12 +45,13 @@ const sanitization_xsslanguageKnownInTamil = (req, res, next) => {
     }
 }
 const sanitization_xssfindElibleStd = (req, res, next) => { 
-       
-    
-    let sanitizeData = [req.body.userGender, req.body.userAge, req.body.userCountry, req.body.userLanguage]
+    let stdData =[sanitizeData]
+    if(stdData.length){
+
+        let sanitizeData = [req.body.userGender, req.body.userAge, req.body.userCountry, req.body.userLanguage]
         try {
             const checkLength = helper.findArrayLength(sanitizeData)
-
+            
             if (checkLength) {
                 for (let index = 0; index < sanitizeData.length; index++) {
                     const element = sanitizeData[index];
@@ -66,6 +67,10 @@ const sanitization_xssfindElibleStd = (req, res, next) => {
         } catch (error) {
             throw error
         }
+    }
+    else{
+        throw new Error("empty Data")
+    }
         
 
 
